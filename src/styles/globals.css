@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #5d5fef;
+  --color-primary-soft: #ececfe;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f7f8fc;
+  --color-muted: #6b7280;
+  --color-text: #111827;
+  --color-accent-green: #34c759;
+  --color-accent-blue: #5d9fff;
+  --color-accent-peach: #ffd8cc;
+  --color-accent-lavender: #e8e4ff;
+
+  --shadow-clay-sm:
+    0 4px 12px rgb(93 95 239 / 8%), 0 12px 28px rgb(17 24 39 / 6%);
+  --shadow-clay:
+    0 8px 24px rgb(93 95 239 / 12%), 0 24px 48px rgb(17 24 39 / 8%);
+  --shadow-clay-inset:
+    inset 0 1px 0 rgb(255 255 255 / 85%), inset 0 -2px 8px rgb(93 95 239 / 6%);
+
+  --radius-clay: 1.5rem;
+  --radius-clay-lg: 2rem;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Vertikal scrollbar paydo bo‘lib-yo‘qolganda kenglik o‘zgarmasin — fixed bottom nav siljimasin */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background-color: var(--color-surface-muted);
+    background-image:
+      radial-gradient(ellipse 120% 80% at 10% -10%, rgb(236 236 254 / 90%), transparent 55%),
+      radial-gradient(ellipse 90% 60% at 100% 0%, rgb(255 216 204 / 55%), transparent 50%),
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgb(232 228 255 / 70%), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

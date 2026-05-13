@@ -1,101 +1,18 @@
 <!doctype html>
 <html lang="uz">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gameducation</title>
-    <link rel="stylesheet" href="shared.css" />
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <nav>
-      <a class="nav-logo-brand" href="index.html"
-        >GAME<span class="g">DU</span><span class="e">CA</span>TION</a
-      >
-      <ul class="nav-links">
-        <li><a href="game1/index.html">Solo</a></li>
-        <li><a href="game2/index.html">Battle</a></li>
-        <li><a href="game3/index.html">Brain</a></li>
-      </ul>
-    </nav>
 
-    <section class="hero">
-      <div class="hero-badge">O'quv o'yinlari platformasi</div>
-      <h1><span class="g">GAME</span><span class="e">DU</span>CATION</h1>
-      <p>
-        Matematikani o'yin orqali o'rgan. Raqiblaringni yeng. Miyangni charxla.
-      </p>
-    </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gameducation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
 
-    <div class="stats">
-      <div class="stat">
-        <span class="stat-num">3</span>
-        <span class="stat-label">O'yin</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">∞</span>
-        <span class="stat-label">Savol</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">1–2</span>
-        <span class="stat-label">O'yinchi</span>
-      </div>
-    </div>
+<body class="antialiased">
+  <div id="root"></div>
+  <script type="module" src="/src/app/main.tsx"></script>
+</body>
 
-    <p class="section-title">O'yinlarni tanlang</p>
-
-    <div class="games">
-      <a href="game1/index.html" class="game-card card-violet">
-        <span class="card-icon">🧮</span>
-        <span class="card-tag tag-violet">Solo</span>
-        <h2>SOLO MATH</h2>
-        <p>Test yech, natijangni saqla va rekordni yenг.</p>
-        <div class="card-meta">
-          <span>👤 1 o'yinchi</span>
-          <span class="difficulty">
-            <div class="dot dot-v"></div>
-            <div class="dot dot-v"></div>
-            <div class="dot"></div>
-          </span>
-        </div>
-        <div class="card-arrow">→</div>
-      </a>
-
-      <a href="game2/index.html" class="game-card card-cyan">
-        <span class="card-icon">⚔️</span>
-        <span class="card-tag tag-cyan">Multiplayer</span>
-        <h2>BATTLE</h2>
-        <p>
-          Ikkita o'yinchi o'rtasida jang. Kim tezroq va to'g'ri javob beradi?
-        </p>
-        <div class="card-meta">
-          <span>👥 2 o'yinchi</span>
-          <span class="difficulty">
-            <div class="dot dot-c"></div>
-            <div class="dot dot-c"></div>
-            <div class="dot dot-c"></div>
-          </span>
-        </div>
-        <div class="card-arrow">→</div>
-      </a>
-
-      <a href="game3/index.html" class="game-card card-amber">
-        <span class="card-icon">🧠</span>
-        <span class="card-tag tag-amber">Xotira</span>
-        <h2>BRAIN GAME</h2>
-        <p>3 sonni eslab qol va yig'indisini top. Vaqt qisqaradi!</p>
-        <div class="card-meta">
-          <span>👤 1 o'yinchi</span>
-          <span class="difficulty">
-            <div class="dot dot-a"></div>
-            <div class="dot dot-a"></div>
-            <div class="dot dot-a"></div>
-          </span>
-        </div>
-        <div class="card-arrow">→</div>
-      </a>
-    </div>
-
-    <footer>GAMEDUCATION &nbsp;·&nbsp; O'quv o'yinlari platformasi</footer>
-  </body>
 </html>
