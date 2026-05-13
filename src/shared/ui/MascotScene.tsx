@@ -6,30 +6,43 @@ import { cn } from '@/shared/lib/cn';
 
 type Props = {
   className?: string;
+  /** true bo‘lsa fon gradienti yo‘q — tashqi layout mesh-gradient ko‘rinadi */
+  transparentBackdrop?: boolean;
+  /**
+   * Oq studiya sahna: qat’iy #fff fon va pastdan yumshoq kulrang soyada chiqarish (UI mockup uchun).
+   */
+  studioStage?: boolean;
 };
 
-export function MascotScene({ className }: Props) {
+export function MascotScene({ className, transparentBackdrop, studioStage }: Props) {
+  const backdropClass = studioStage
+    ? 'bg-white'
+    : transparentBackdrop
+      ? 'bg-transparent'
+      : 'bg-gradient-to-br from-[#e8eeff] via-white to-[#f6e9ff]';
+
   return (
-    <div
-      className={cn(
-        'overflow-hidden bg-gradient-to-br from-[#e8eeff] via-white to-[#f6e9ff]',
-        className,
-      )}
-    >
+    <div className={cn('overflow-hidden', backdropClass, className)}>
       <Canvas
         className="h-full w-full"
         shadows
         dpr={[1, 2]}
-        camera={{ position: [0, 0.12, 3.45], fov: 40 }}
+        camera={{
+          position: [0, 0.1, studioStage ? 4.05 : 3.45],
+          fov: 40,
+        }}
       >
         <color attach="background" args={['transparent']} />
-        <ambientLight intensity={0.55} />
-        <directionalLight position={[4.2, 6.5, 4.5]} intensity={1.05} castShadow />
+        <ambientLight intensity={studioStage ? 0.62 : 0.55} />
+        <directionalLight position={[4.2, 6.5, 4.5]} intensity={studioStage ? 0.92 : 1.05} castShadow />
         <directionalLight position={[-3.5, 3, -2]} intensity={0.35} color="#d4e2ff" />
         <pointLight position={[0.8, 1.6, 1.8]} intensity={0.45} color="#fff4cc" distance={8} decay={2} />
         <Suspense fallback={null}>
-          <ScholarBuddy />
-          <Environment preset="city" />
+          <ScholarBuddy studio={studioStage} />
+          <Environment
+            preset={studioStage ? 'studio' : 'city'}
+            {...(studioStage ? { environmentIntensity: 0.48 } : {})}
+          />
         </Suspense>
       </Canvas>
     </div>
@@ -37,7 +50,7 @@ export function MascotScene({ className }: Props) {
 }
 
 /** O‘yin + o‘qish: kalpak, diplom qalqoni, ochiq kitob bilan do‘st karakter */
-function ScholarBuddy() {
+function ScholarBuddy({ studio }: { studio?: boolean }) {
   const root = useRef<Group>(null);
   const book = useRef<Group>(null);
   const shield = useRef<Group>(null);
@@ -73,10 +86,14 @@ function ScholarBuddy() {
 
   return (
     <group ref={root} position={[0, -0.18, 0]}>
-      {/* Pastki “platforma” — chuqurlik uchun */}
-      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.78, 0]}>
-        <circleGeometry args={[1.15, 40]} />
-        <meshStandardMaterial color="#eef1ff" roughness={0.85} metalness={0} />
+      {/* Pastki «pol» — studiyada kulrang ellips soya, aks holda yengil ko‘k platforma */}
+      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.78, 0]} scale={studio ? [1.12, 1, 0.36] : [1, 1, 1]}>
+        <circleGeometry args={[studio ? 1.02 : 1.15, studio ? 64 : 40]} />
+        {studio ? (
+          <meshBasicMaterial color="#d7dbe6" transparent opacity={0.42} depthWrite={false} />
+        ) : (
+          <meshStandardMaterial color="#eef1ff" roughness={0.85} metalness={0} />
+        )}
       </mesh>
 
       {/* Diplom / g‘alaba qalqoni */}
