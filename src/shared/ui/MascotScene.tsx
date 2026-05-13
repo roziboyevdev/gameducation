@@ -1,6 +1,6 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, RoundedBox } from '@react-three/drei';
-import { Suspense, useRef } from 'react';
+import { RoundedBox } from '@react-three/drei';
+import { useRef } from 'react';
 import type { Group } from 'three';
 import { cn } from '@/shared/lib/cn';
 
@@ -26,24 +26,21 @@ export function MascotScene({ className, transparentBackdrop, studioStage }: Pro
       <Canvas
         className="h-full w-full"
         shadows
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
         camera={{
           position: [0, 0.1, studioStage ? 4.05 : 3.45],
           fov: 40,
         }}
       >
         <color attach="background" args={['transparent']} />
-        <ambientLight intensity={studioStage ? 0.62 : 0.55} />
-        <directionalLight position={[4.2, 6.5, 4.5]} intensity={studioStage ? 0.92 : 1.05} castShadow />
-        <directionalLight position={[-3.5, 3, -2]} intensity={0.35} color="#d4e2ff" />
-        <pointLight position={[0.8, 1.6, 1.8]} intensity={0.45} color="#fff4cc" distance={8} decay={2} />
-        <Suspense fallback={null}>
-          <ScholarBuddy studio={studioStage} />
-          <Environment
-            preset={studioStage ? 'studio' : 'city'}
-            {...(studioStage ? { environmentIntensity: 0.48 } : {})}
-          />
-        </Suspense>
+        {/* Environment (HDR) tarmoqdan yuklanardi — olib tashlandi; quyidagi yoritish physmat uchun yetarli */}
+        <hemisphereLight args={[studioStage ? '#e8eeff' : '#dde4ff', '#ffffff', studioStage ? 0.46 : 0.4]} />
+        <ambientLight intensity={studioStage ? 0.58 : 0.5} />
+        <directionalLight position={[4.2, 6.5, 4.5]} intensity={studioStage ? 0.95 : 1.08} castShadow />
+        <directionalLight position={[-3.5, 3, -2]} intensity={0.38} color="#d4e2ff" />
+        <directionalLight position={[-1.2, 5.5, 4]} intensity={0.22} color="#fef9c3" />
+        <pointLight position={[0.8, 1.6, 1.8]} intensity={0.42} color="#fff4cc" distance={8} decay={2} />
+        <ScholarBuddy studio={studioStage} />
       </Canvas>
     </div>
   );
